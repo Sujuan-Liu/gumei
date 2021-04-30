@@ -1,7 +1,14 @@
-# gumei
-personal websit
+# Gumei
 
-- 乱花渐欲迷人眼，用心思辨路自清
-- 化繁为简
-- 水滴石穿
-
+- Typescript
+- create-react-app
+- react-router-dom
+- react-redux
+- redux-saga
+- apex-chart
+- echarts
+- mock server
+- Material UI
+- auth module + node.js server
+- some hooks usage
+- websocket + node.js server
