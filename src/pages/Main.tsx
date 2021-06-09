@@ -1,34 +1,55 @@
 import React, { Component } from 'react';
+import { RouteComponentProps } from 'react-router';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link,
+  Redirect,
+  withRouter,
 } from 'react-router-dom';
-import Menu, { menuList } from '../enums/menu';
-import About from './About';
-import FEE from './FEE';
-import Music from './Music';
-import Photography from './Photography';
-import Reading from './Reading';
-import SimpleLife from './SimpleLife';
-
-import logo from '../assets/icons/pi.jpg';
+import SwipeableViews from 'react-swipeable-views';
+import Menu, { menuList, MenuType } from 'enums/menu';
+import Home from 'pages/Home';
+import About from 'pages/About';
+import FEE from 'pages/FEE';
+import Music from 'pages/Music';
+import Photography from 'pages/Photography';
+import Reading from 'pages/Reading';
+import SimpleLife from 'pages/SimpleLife';
+import MainMenu from 'components/MainMenu';
 
 type MainPageState = {
-  currentMenu: string,
+  currentMenu: MenuType,
 }
-class MainPage extends Component<{}, MainPageState> {
+class MainPage extends Component<RouteComponentProps & {}, MainPageState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      currentMenu: Menu.ABOUT.key,
+      currentMenu: menuList.filter(menu => menu.path === this.props.location.pathname)[0] || Menu.HOME,
     };
+    this.handleMenuChange = this.handleMenuChange.bind(this);
   }
 
-  usePageViews = (currentMenu: string) => {
+  shouldComponentUpdate() {
+    return this.props.location.pathname === this.state.currentMenu.path;
+  }
+
+  setStateWithLoaction = () => {
+    const {
+      pathname,
+    } = this.props.location;
+    menuList.map(menu => {
+      if (menu.path === pathname) {
+        this.setState({
+          currentMenu: menu,
+        });
+      }
+      return menu;
+    });
+  }
+
+  handleMenuChange = (menu: MenuType) => {
     this.setState({
-      currentMenu,
+      currentMenu: menu,
     });
   }
 
@@ -37,49 +58,48 @@ class MainPage extends Component<{}, MainPageState> {
       currentMenu,
     } = this.state;
     return (
-      <Router>
-        <header>
-          <img src={logo} alt="logo" width="60" />
-          <nav>
-            <ul>
-              {
-                menuList.map(menu => (
-                  <li key={menu.key}>
-                    <Link to={`/${menu.key}`} onClick={this.usePageViews.bind(this, menu.key)} className={currentMenu === menu.key ? 'actived' : ''}>{menu.title}</Link>
-                  </li>
-                ))
-              }
-            </ul>
-          </nav>
-        </header>
-        <div className="main-content">
+      <div>
+        <div className="home-page">
           <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/fe-e">
-              <FEE />
-            </Route>
-            <Route path="/photography">
-              <Photography />
-            </Route>
-            <Route path="/music">
-              <Music />
-            </Route>
-            <Route path="/reading">
-              <Reading />
-            </Route>
-            <Route path="/simple-life">
-              <SimpleLife />
-            </Route>
-            <Route exact path="/">
-              <About />
-            </Route>
+            <SwipeableViews index={currentMenu.index || 0}>
+              <Route path="/home">
+                <Home />
+              </Route>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/fe-e">
+                <FEE />
+              </Route>
+              <Route path="/photography">
+                <Photography />
+              </Route>
+              <Route path="/music">
+                <Music />
+              </Route>
+              <Route path="/reading">
+                <Reading />
+              </Route>
+              <Route path="/simple-life">
+                <SimpleLife />
+              </Route>
+              <Route exact path="/">
+                <Redirect to='/home' />
+              </Route>
+            </SwipeableViews>
           </Switch>
         </div>
-      </Router>
+        <footer>
+          <nav>
+            <MainMenu
+              currentMenu={currentMenu}
+              changeMenu={this.handleMenuChange}
+            />
+          </nav>
+        </footer>
+      </div>
     );
   }
 }
 
-export default MainPage;
+export default withRouter(MainPage);

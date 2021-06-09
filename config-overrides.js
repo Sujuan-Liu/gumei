@@ -1,20 +1,19 @@
-const { override, addDecoratorsLegacy } = require('customize-cra');
+const {
+  override,
+  addDecoratorsLegacy,
+  addWebpackAlias,
+} = require('customize-cra');
+const path = require('path');
 
 module.exports = {
   webpack: override(
     // usual webpack plugin
     addDecoratorsLegacy(),
-    config => {
-      config.module.rules = [
-        {
-          test: /\.(png|jpe?g|gif)$/i,
-          loader: 'file-loader',
-          options: {
-            publicPath: '/assets',
-          },
-        },
-      ];
-      return config;
-    }
+    addWebpackAlias({
+      components: path.resolve(__dirname, 'src/components/'),
+      pages: path.resolve(__dirname, 'src/pages/'),
+      enums: path.resolve(__dirname, 'src/enums/'),
+      store: path.resolve(__dirname, 'src/store/'),
+    })
   ),
 };
