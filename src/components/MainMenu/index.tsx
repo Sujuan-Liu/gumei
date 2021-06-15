@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RotateTitle from './RotateTitle';
 import { menuList, MenuType } from '../../enums/menu';
 
 type MainMenuProps = {
@@ -19,7 +20,9 @@ const MainMenu = (props:MainMenuProps) => {
               onClick={() => props.changeMenu(menu)}
               className={currentMenu.key === menu.key ? 'actived' : ''}
             >
-              {menu.title}
+              <RotateTitle
+                title={menu.title}
+              />
             </Link>
           </li>
         ))
