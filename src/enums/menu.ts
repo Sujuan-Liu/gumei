@@ -1,6 +1,6 @@
 import ahiru from '../assets/images/ahiru.jpg';
 import swan from '../assets/images/swan.jpg';
-import usagi from '../assets/images/usagi.jpg';
+// import usagi from '../assets/images/usagi.jpg';
 import wani from '../assets/images/wani.jpg';
 
 export type MenuType = {
@@ -17,25 +17,25 @@ class Menu {
       key: 'home',
       path: '/home',
       title: {
-        cn: '橘域',
+        cn: '谷妹',
         en: `Suzy's Feild`,
       },
       index: 0,
     };
   }
 
-  public static get ABOUT(): MenuType {
-    return {
-      key: 'about',
-      path: '/about',
-      title: {
-        cn: '关于我',
-        en: 'About',
-      },
-      img: {src: usagi, alt: 'suzy-field-usagi'},
-      index: 1,
-    };
-  }
+  // public static get ABOUT(): MenuType {
+  //   return {
+  //     key: 'about',
+  //     path: '/about',
+  //     title: {
+  //       cn: '关于我',
+  //       en: 'About',
+  //     },
+  //     img: {src: usagi, alt: 'suzy-field-usagi'},
+  //     index: 1,
+  //   };
+  // }
   
   public static get FEE(): MenuType {
     return {
@@ -81,7 +81,7 @@ export default Menu;
 
 export const menuList: MenuType[] = [
   Menu.HOME,
-  Menu.ABOUT,
+  // Menu.ABOUT,
   Menu.FEE,
   Menu.PHOTOGRAPHY,
   Menu.READING_MUSIC,

@@ -9,7 +9,6 @@ import {
 import SwipeableViews from 'react-swipeable-views';
 import Menu, { menuList, MenuType } from 'enums/menu';
 import Home from 'pages/Home';
-import About from 'pages/About';
 import FEE from 'pages/FEE';
 import Photography from 'pages/Photography';
 import Reading from 'pages/Reading';
@@ -62,9 +61,6 @@ class MainPage extends Component<RouteComponentProps & {}, MainPageState> {
             <SwipeableViews index={currentMenu.index || 0}>
               <Route path="/home">
                 <Home />
-              </Route>
-              <Route path="/about">
-                <About />
               </Route>
               <Route path="/fe-e">
                 <FEE />
