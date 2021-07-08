@@ -1,0 +1,18 @@
+.ccard-main {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ccard {
+  width: 130px;
+  height: 130px;
+  background-image: -webkit-linear-gradient(bottom, #bdc2e8, #e6dee9); 
+  border-radius: 5px;
+  transition: box-shadow 0.5s;
+  will-change: transform;
+}

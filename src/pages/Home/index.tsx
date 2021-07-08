@@ -1,21 +1,32 @@
 import React from 'react';
-// import {useSpring, useTransition, animated, config } from 'react-spring';
+import AnimateCard from '../../components/AnimateCard';
+import RotateCircle from '../../components/RotateCircle';
+// import ChainPolygon from '../../components/ChainPolygon';
+import ahiru from '../../assets/images/ahiru.jpg';
+import {useSpring, animated, config } from 'react-spring';
 
 import './index.less';
 
 const Home = () => {
 
+  const transitions = useSpring({
+    from: { opacity: 0.2, justifyContent: 'center' },
+    to: { opacity: 1, justifyContent: 'space-between' },
+    delay: 800,
+    config: config.slow,
+  });
   return (
     <div>
-      <header>
-        <h3>Suzy's Field</h3>
-        <div className="tool-links">
-          <span>Email</span>
-          <span>DouBan</span>
+      <animated.header style={transitions}>
+        <h3><img src={ahiru} alt="logo" width="20" /><span>谷妹·橘域</span></h3>
+        <div className="slogan">
+          If the day and the night make one joyful , one is successful.
         </div>
-      </header>
+      </animated.header>
       <div className="main-logo">
-        Now or Never
+        <AnimateCard />
+        <RotateCircle />
+        {/* <ChainPolygon /> */}
       </div>
     </div>
   );

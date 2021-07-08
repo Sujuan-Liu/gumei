@@ -1,14 +1,12 @@
 import ahiru from '../assets/images/ahiru.jpg';
-import kangaroo from '../assets/images/kangaroo.jpg';
-import risu from '../assets/images/risu.jpg';
 import swan from '../assets/images/swan.jpg';
-import usagi from '../assets/images/usagi.jpg';
+// import usagi from '../assets/images/usagi.jpg';
 import wani from '../assets/images/wani.jpg';
 
 export type MenuType = {
   key: string,
   path: string,
-  title: string,
+  title: { cn: string, en: string },
   index: number,
   img?: { src: string, alt: string },
 };
@@ -18,26 +16,35 @@ class Menu {
     return {
       key: 'home',
       path: '/home',
-      title: `Suzy's Feild`,
+      title: {
+        cn: '谷妹',
+        en: `Suzy's Feild`,
+      },
       index: 0,
     };
   }
 
-  public static get ABOUT(): MenuType {
-    return {
-      key: 'about',
-      path: '/about',
-      title: 'About',
-      img: {src: usagi, alt: 'suzy-field-usagi'},
-      index: 1,
-    };
-  }
+  // public static get ABOUT(): MenuType {
+  //   return {
+  //     key: 'about',
+  //     path: '/about',
+  //     title: {
+  //       cn: '关于我',
+  //       en: 'About',
+  //     },
+  //     img: {src: usagi, alt: 'suzy-field-usagi'},
+  //     index: 1,
+  //   };
+  // }
   
   public static get FEE(): MenuType {
     return {
       key: 'fe-e',
       path: '/fe-e',
-      title: 'Front-End Engineer',
+      title: {
+        cn: '前端开发',
+        en: 'Front-End Development',
+      },
       img: {src: wani, alt: 'suzy-field-wani'},
       index: 2,
     };
@@ -47,39 +54,25 @@ class Menu {
     return {
       key: 'photography',
       path: '/photography',
-      title: 'Photography',
+      title: {
+        cn: '摄影作品',
+        en: 'Photography',
+      },
       img: {src: ahiru, alt: 'suzy-field-ahiru'},
       index: 3,
     };
   }
   
-  public static get MUSIC(): MenuType {
+  public static get READING_MUSIC(): MenuType {
     return {
-      key: 'music',
-      path: '/music',
-      title: 'Music',
-      img: {src: kangaroo, alt: 'suzy-field-kangaroo'},
-      index: 4,
-    };
-  }
-  
-  public static get READING(): MenuType {
-    return {
-      key: 'reading',
-      path: '/reading',
-      title: 'Reading',
-      img: {src: risu, alt: 'suzy-field-risu'},
-      index: 5,
-    };
-  }
-  
-  public static get SIMPLE_LIFE(): MenuType {
-    return {
-      key: 'simple-life',
-      path: '/simple-life',
-      title: 'Simple Life',
+      key: 'reading-and-music',
+      path: '/reading-and-music',
+      title: {
+        cn: '阅读&音乐',
+        en: 'Reading&Music',
+      },
       img: {src: swan, alt: 'suzy-field-swan'},
-      index: 6,
+      index: 4,
     };
   }
 }
@@ -88,10 +81,8 @@ export default Menu;
 
 export const menuList: MenuType[] = [
   Menu.HOME,
-  Menu.ABOUT,
+  // Menu.ABOUT,
   Menu.FEE,
   Menu.PHOTOGRAPHY,
-  Menu.MUSIC,
-  Menu.READING,
-  Menu.SIMPLE_LIFE,
+  Menu.READING_MUSIC,
 ];
